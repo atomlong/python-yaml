@@ -10,35 +10,32 @@ pkgdesc='Python bindings for YAML, using fast libYAML library'
 url='https://pyyaml.org/wiki/PyYAML'
 arch=('x86_64' 'i686' 'arm' 'armv6h' 'armv7h' 'aarch64')
 license=('MIT')
-makedepends=('python' 'python2' 'libyaml' 'cython' 'cython2')
-source=(PyYAML-${pkgver}.tar.gz::https://github.com/yaml/pyyaml/archive/${pkgver}.tar.gz)
+makedepends=('python' 'python2' 'python-setuptools' 'python2-setuptools' 'libyaml' 'cython' 'cython2')
+source=(pyyaml-${pkgver}.tar.gz::https://github.com/yaml/pyyaml/archive/${pkgver}.tar.gz)
 sha512sums=('691e54fd9ca01fdc0dcb7de03ddd1970614d92a716c2437032999f9001f90a2ebbcc195a49bfdbe54da0f7a63178c83b02b05b18b5b1024127013f004d1f5997')
 
 prepare() {
-  # Force cython rebuild
-  rm PyYAML-$pkgver/ext/_yaml.c
-
-  cp -a PyYAML-$pkgver{,-py2}
+  cp -a pyyaml-$pkgver{,-py2}
 }
 
 build() {
   (
-    cd PyYAML-$pkgver
+    cd pyyaml-$pkgver
     python setup.py --with-libyaml build
   )
   (
-    cd PyYAML-$pkgver-py2
+    cd pyyaml-$pkgver-py2
     python2 setup.py --with-libyaml build
   )
 }
 
 check() {
   (
-    cd PyYAML-$pkgver
+    cd pyyaml-$pkgver
     python -B setup.py test
   )
   (
-    cd PyYAML-$pkgver-py2
+    cd pyyaml-$pkgver-py2
     python2 -B setup.py test
   )
 }
@@ -46,7 +43,7 @@ check() {
 package_python-yaml() {
   depends=('python' 'libyaml')
 
-  cd PyYAML-$pkgver
+  cd pyyaml-$pkgver
   python setup.py  --with-libyaml install --prefix=/usr --root="${pkgdir}" -O1 --skip-build
   install -Dm 644 LICENSE -t "${pkgdir}"/usr/share/licenses/${pkgname}
   install -Dm 644 CHANGES README -t "${pkgdir}"/usr/share/doc/${pkgname}
@@ -55,7 +52,7 @@ package_python-yaml() {
 package_python2-yaml() {
   depends=('python2' 'libyaml')
 
-  cd PyYAML-$pkgver-py2
+  cd pyyaml-$pkgver-py2
   python2 setup.py --with-libyaml install --prefix=/usr --root="${pkgdir}" -O1 --skip-build
   install -Dm 644 LICENSE -t "${pkgdir}"/usr/share/licenses/${pkgname}
   install -Dm 644 CHANGES README -t "${pkgdir}"/usr/share/doc/${pkgname}
