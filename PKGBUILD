@@ -4,15 +4,15 @@
 
 pkgbase=python-yaml
 pkgname=(python-yaml python2-yaml)
-pkgver=5.4.1
+pkgver=5.4.1.1
 pkgrel=1
 pkgdesc='Python bindings for YAML, using fast libYAML library'
 url='https://pyyaml.org/wiki/PyYAML'
 arch=('x86_64' 'i686' 'arm' 'armv6h' 'armv7h' 'aarch64')
 license=('MIT')
-makedepends=('python' 'python2' 'python-setuptools' 'python2-setuptools' 'libyaml' 'cython' 'cython2')
+makedepends=('python-setuptools' 'python2-setuptools' 'libyaml' 'cython' 'cython2')
 source=(pyyaml-${pkgver}.tar.gz::https://github.com/yaml/pyyaml/archive/${pkgver}.tar.gz)
-sha512sums=('691e54fd9ca01fdc0dcb7de03ddd1970614d92a716c2437032999f9001f90a2ebbcc195a49bfdbe54da0f7a63178c83b02b05b18b5b1024127013f004d1f5997')
+sha512sums=('bcbe911fbef7e6e8ef8a76293593d4d792dbbf0931a2d031cdeacddf7064b69f958484217bc60d1b7614dcc83ef56cd5c0cd48a0339ab9add623ef70cb2d0a20')
 
 prepare() {
   cp -a pyyaml-$pkgver{,-py2}
