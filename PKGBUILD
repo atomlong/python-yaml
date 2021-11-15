@@ -3,8 +3,8 @@
 # Contributor: Michal Bozon <michal.bozon__at__gmail.com>
 
 pkgname=python-yaml
-pkgver=5.4.1.1
-pkgrel=2
+pkgver=6.0
+pkgrel=1
 pkgdesc='Python bindings for YAML, using fast libYAML library'
 url='https://pyyaml.org/wiki/PyYAML'
 arch=('x86_64' 'i686' 'arm' 'armv6h' 'armv7h' 'aarch64')
@@ -12,7 +12,7 @@ license=('MIT')
 depends=('python' 'libyaml')
 makedepends=('python-setuptools' 'libyaml' 'cython')
 source=(pyyaml-${pkgver}.tar.gz::https://github.com/yaml/pyyaml/archive/${pkgver}.tar.gz)
-sha512sums=('bcbe911fbef7e6e8ef8a76293593d4d792dbbf0931a2d031cdeacddf7064b69f958484217bc60d1b7614dcc83ef56cd5c0cd48a0339ab9add623ef70cb2d0a20')
+sha512sums=('cbcacc3560a035e2082867e93a9733f8660ea4c7f60573d07642f33a5453dcdc88d67299c3bcb97c27b843202a45d40de7444eb5e815bd4955129c9fc8ae04ad')
 
 build() {
   (
@@ -32,7 +32,7 @@ package() {
   cd pyyaml-$pkgver
   python setup.py  --with-libyaml install --prefix=/usr --root="${pkgdir}" -O1 --skip-build
   install -Dm 644 LICENSE -t "${pkgdir}"/usr/share/licenses/${pkgname}
-  install -Dm 644 CHANGES README -t "${pkgdir}"/usr/share/doc/${pkgname}
+  install -Dm 644 CHANGES README.md -t "${pkgdir}"/usr/share/doc/${pkgname}
 }
 
 # vim: ts=2 sw=2 et:
